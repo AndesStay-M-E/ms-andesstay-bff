@@ -15,6 +15,9 @@ andesstay:
   security:
     allowed-audiences: c6126dbb-653d-40ae-9c1f-731a504108b6,api://c6126dbb-653d-40ae-9c1f-731a504108b6
 
+  services:
+    reservations-url: ${RESERVATIONS_URL:http://localhost:8081}
+    
 management:
   endpoints:
     web:
