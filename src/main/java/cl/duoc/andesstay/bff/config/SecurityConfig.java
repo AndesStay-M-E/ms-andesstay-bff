@@ -116,21 +116,36 @@ public class SecurityConfig {
         return authenticationConverter;
     }
 
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
+        @Bean
+        CorsConfigurationSource corsConfigurationSource(
+                @Value("#{'${andesstay.security.allowed-origins}'.split(',')}")
+                List<String> allowedOrigins) {
+
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(
-                List.of("http://localhost:4200"));
+        configuration.setAllowedOrigins(allowedOrigins);
 
         configuration.setAllowedMethods(
-                List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+                List.of(
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "OPTIONS"
+                )
+        );
 
         configuration.setAllowedHeaders(
-                List.of("Authorization", "Content-Type"));
+                List.of(
+                        "Authorization",
+                        "Content-Type"
+                )
+        );
 
         configuration.setExposedHeaders(
-                List.of("Location"));
+                List.of("Location")
+        );
 
         configuration.setAllowCredentials(true);
 
@@ -140,5 +155,5 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", configuration);
 
         return source;
-    }
+        }
 }

@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: ${PORT:8080}
 
 spring:
   application:
@@ -9,15 +9,16 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: https://login.microsoftonline.com/24b1cd18-d18e-4855-bcaf-51ac2db566d5/v2.0
+          issuer-uri: ${AZURE_ISSUER_URI:https://login.microsoftonline.com/24b1cd18-d18e-4855-bcaf-51ac2db566d5/v2.0}
 
 andesstay:
   security:
-    allowed-audiences: c6126dbb-653d-40ae-9c1f-731a504108b6,api://c6126dbb-653d-40ae-9c1f-731a504108b6
+    allowed-audiences: ${AZURE_ALLOWED_AUDIENCES:c6126dbb-653d-40ae-9c1f-731a504108b6,api://c6126dbb-653d-40ae-9c1f-731a504108b6}
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:4200}
 
   services:
     reservations-url: ${RESERVATIONS_URL:http://localhost:8081}
-    
+
 management:
   endpoints:
     web:
