@@ -1,0 +1,10 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://login.microsoftonline.com/4fe52189-087c-4613-8660-500431cc0eb9/v2.0
+
+andesstay:
+  security:
+    allowed-audiences: 85237aa5-9ece-48d3-8767-9698df0efefa,api://85237aa5-9ece-48d3-8767-9698df0efefa
