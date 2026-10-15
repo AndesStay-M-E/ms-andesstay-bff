@@ -82,4 +82,23 @@ public class ReservationsProxyController {
     ) {
         return reservationsClient.cancel(id, authorization);
     }
+
+    /**
+     * Cambia el estado de la reserva. Cada cambio publica mensajes en
+     * RabbitMQ desde ms-andesstay-reservations.
+     * Body: { "status": "CHECKIN_PENDIENTE" }
+     */
+    @PutMapping("/{id}/status")
+    public ResponseEntity<String> updateStatus(
+            @PathVariable Long id,
+            @RequestBody String body,
+            @RequestHeader(HttpHeaders.AUTHORIZATION)
+            String authorization
+    ) {
+        return reservationsClient.updateStatus(
+                id,
+                body,
+                authorization
+        );
+    }
 }

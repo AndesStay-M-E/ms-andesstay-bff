@@ -98,6 +98,20 @@ public class ReservationsClient {
         );
     }
 
+    public ResponseEntity<String> updateStatus(
+            Long id,
+            String body,
+            String authorization
+    ) {
+        return exchange(
+                restClient.put()
+                        .uri("/api/reservations/{id}/status", id)
+                        .header(HttpHeaders.AUTHORIZATION, authorization)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(body)
+        );
+    }
+
     private ResponseEntity<String> exchange(
             RestClient.RequestHeadersSpec<?> request
     ) {
