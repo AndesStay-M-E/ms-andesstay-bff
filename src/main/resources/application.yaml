@@ -18,6 +18,9 @@ andesstay:
 
   services:
     reservations-url: ${RESERVATIONS_URL:http://localhost:8081}
+    catalog-url: ${CATALOG_URL:http://localhost:8082}
+    report-url: ${REPORT_URL:http://localhost:8084}
+    audit-url: ${AUDIT_URL:http://localhost:8085}
 
 management:
   endpoints:

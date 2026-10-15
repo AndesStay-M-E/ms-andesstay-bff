@@ -17,4 +17,13 @@ public class RestClientConfig {
                 .baseUrl(reservationsUrl)
                 .build();
     }
+
+    /**
+     * Cliente genérico para catalog, report y audit. Cada controlador proxy
+     * indica la URL base del microservicio (andesstay.services.*-url).
+     */
+    @Bean("downstreamRestClient")
+    RestClient downstreamRestClient() {
+        return RestClient.builder().build();
+    }
 }

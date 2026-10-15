@@ -50,6 +50,12 @@ public class SecurityConfig {
                         .hasAnyRole("ADMIN", "OPERADOR", "CLIENTE")
                         .requestMatchers("/api/auditor/**")
                         .hasAnyRole("ADMIN", "AUDITOR")
+                        // Microservicios internos (los roles finos se validan también en cada uno)
+                        .requestMatchers("/api/reports/**").hasRole("ADMIN")
+                        .requestMatchers("/api/audit/**")
+                        .hasAnyRole("ADMIN", "AUDITOR")
+                        .requestMatchers("/api/catalog/**")
+                        .hasAnyRole("ADMIN", "OPERADOR", "CLIENTE", "AUDITOR")
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(resourceServer ->
                         resourceServer.jwt(jwt ->
