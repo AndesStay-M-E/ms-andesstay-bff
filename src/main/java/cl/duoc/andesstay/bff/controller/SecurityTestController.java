@@ -37,8 +37,8 @@ public class SecurityTestController {
                 authentication.getToken().getClaimAsString("name"));
         response.put(
                 "roles",
-                authentication.getToken()
-                        .getClaimAsStringList("roles"));
+                java.util.Optional.ofNullable(authentication.getToken()
+                        .getClaimAsStringList("roles")).orElse(java.util.List.of()));
         response.put(
                 "audience",
                 authentication.getToken().getAudience());

@@ -9,11 +9,11 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: ${AZURE_ISSUER_URI:https://login.microsoftonline.com/24b1cd18-d18e-4855-bcaf-51ac2db566d5/v2.0}
+          issuer-uri: ${AZURE_ISSUER_URI:https://login.microsoftonline.com/4fe52189-087c-4613-8660-500431cc0eb9/v2.0}
 
 andesstay:
   security:
-    allowed-audiences: ${AZURE_ALLOWED_AUDIENCES:c6126dbb-653d-40ae-9c1f-731a504108b6,api://c6126dbb-653d-40ae-9c1f-731a504108b6}
+    allowed-audiences: ${AZURE_ALLOWED_AUDIENCES:85237aa5-9ece-48d3-8767-9698df0efefa,api://85237aa5-9ece-48d3-8767-9698df0efefa}
     allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:4200}
 
   services:
@@ -21,6 +21,17 @@ andesstay:
     catalog-url: ${CATALOG_URL:http://localhost:8082}
     report-url: ${REPORT_URL:http://localhost:8084}
     audit-url: ${AUDIT_URL:http://localhost:8085}
+
+# Microsoft Graph onboarding. Disabled until a separate confidential app
+# has User.Invite.All, AppRoleAssignment.ReadWrite.All and Application.Read.All
+# application permissions with administrator consent in Endfield398.
+  registration:
+    enabled: ${REGISTRATION_ENABLED:false}
+    tenant-id: 4fe52189-087c-4613-8660-500431cc0eb9
+    client-id: ${GRAPH_CLIENT_ID:}
+    client-secret: ${GRAPH_CLIENT_SECRET:}
+    api-app-id: 85237aa5-9ece-48d3-8767-9698df0efefa
+    redirect-url: ${REGISTRATION_REDIRECT_URL:https://main.d32i73fsq9ui1t.amplifyapp.com/login}
 
 management:
   endpoints:
@@ -30,4 +41,4 @@ management:
 
   endpoint:
     health:
-      show-details: always
+      show-details: when-authorized
