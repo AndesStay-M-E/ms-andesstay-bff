@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestClient;
 
+import java.net.URI;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.header;
@@ -55,6 +57,7 @@ class DownstreamClientTest {
                 .andExpect(content().json("{\"name\":\"Cabaña\"}"))
                 .andRespond(withStatus(HttpStatus.CREATED)
                         .contentType(MediaType.APPLICATION_JSON)
+                        .location(URI.create("/api/catalog/accommodations/5"))
                         .body("{\"id\":5}"));
 
         ResponseEntity<String> response = client.forward(
@@ -63,6 +66,7 @@ class DownstreamClientTest {
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         assertThat(response.getHeaders().getContentType()).isEqualTo(MediaType.APPLICATION_JSON);
+        assertThat(response.getHeaders().getLocation()).isEqualTo(URI.create("/api/catalog/accommodations/5"));
         server.verify();
     }
 

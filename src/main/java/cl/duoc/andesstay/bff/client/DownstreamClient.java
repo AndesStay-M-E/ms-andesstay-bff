@@ -18,8 +18,8 @@ import java.nio.charset.StandardCharsets;
  *
  * Copia el método HTTP, la ruta, los parámetros de consulta, el cuerpo JSON
  * y el header Authorization (el JWT del usuario). Devuelve la respuesta del
- * microservicio tal cual (código HTTP, Content-Type y cuerpo), de modo que los
- * errores 400/403/404/409 llegan al frontend con su detalle.
+ * microservicio tal cual (código HTTP, Content-Type, Location y cuerpo), de modo
+ * que los errores 400/403/404/409 llegan al frontend con su detalle.
  */
 @Component
 public class DownstreamClient {
@@ -74,6 +74,12 @@ public class DownstreamClient {
             MediaType contentType = httpResponse.getHeaders().getContentType();
             if (contentType != null) {
                 headers.setContentType(contentType);
+            }
+
+            // En los 201 Created se copia también el Location (ej. /api/kafka/topics/demo.events).
+            URI location = httpResponse.getHeaders().getLocation();
+            if (location != null) {
+                headers.setLocation(location);
             }
 
             return new ResponseEntity<>(responseBody, headers, httpResponse.getStatusCode());

@@ -59,4 +59,33 @@ public class ReportsProxyController {
         return client.forward(reportUrl, HttpMethod.GET, "/api/reports/vouchers/" + encodedCode,
                 null, null, authorization);
     }
+
+    /* ===== Panel de KPIs (datos que llegan por Kafka) ===== */
+
+    @GetMapping("/kpis")
+    public ResponseEntity<String> kpis(
+            HttpServletRequest request,
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization
+    ) {
+        return client.forward(reportUrl, HttpMethod.GET, "/api/reports/kpis",
+                request.getQueryString(), null, authorization);
+    }
+
+    @GetMapping("/top-units")
+    public ResponseEntity<String> topUnits(
+            HttpServletRequest request,
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization
+    ) {
+        return client.forward(reportUrl, HttpMethod.GET, "/api/reports/top-units",
+                request.getQueryString(), null, authorization);
+    }
+
+    @GetMapping("/activity")
+    public ResponseEntity<String> activity(
+            HttpServletRequest request,
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization
+    ) {
+        return client.forward(reportUrl, HttpMethod.GET, "/api/reports/activity",
+                request.getQueryString(), null, authorization);
+    }
 }

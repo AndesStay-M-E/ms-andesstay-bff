@@ -52,6 +52,8 @@ public class SecurityConfig {
                         .hasAnyRole("ADMIN", "AUDITOR")
                         // Microservicios internos (los roles finos se validan también en cada uno)
                         .requestMatchers("/api/reports/**").hasRole("ADMIN")
+                        // Administradores de RabbitMQ y Kafka
+                        .requestMatchers("/api/rabbit/**", "/api/kafka/**").hasRole("ADMIN")
                         .requestMatchers("/api/audit/**")
                         .hasAnyRole("ADMIN", "AUDITOR")
                         .requestMatchers("/api/catalog/**")

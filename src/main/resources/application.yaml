@@ -21,6 +21,9 @@ andesstay:
     catalog-url: ${CATALOG_URL:http://localhost:8082}
     report-url: ${REPORT_URL:http://localhost:8084}
     audit-url: ${AUDIT_URL:http://localhost:8085}
+    # Administradores de mensajería (solo rol ADMIN)
+    rabbit-admin-url: ${RABBIT_ADMIN_URL:http://localhost:8086}
+    kafka-admin-url: ${KAFKA_ADMIN_URL:http://localhost:8087}
 
 # Microsoft Graph onboarding. Disabled until a separate confidential app
 # has User.Invite.All, AppRoleAssignment.ReadWrite.All and Application.Read.All
